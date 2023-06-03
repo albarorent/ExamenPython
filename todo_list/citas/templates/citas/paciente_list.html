@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<a href="{% url 'paciente-create' %}"
+            ><i class="bi bi-plus-circle"></i> Crear Paciente</a
+          > 
+<div class="center">
+  <h2>Mi lista de Pacientes</h2>
+  {% if paciente %}
+  <ul class="tasks">
+    {% for paciente in paciente %}
+    <li>
+      <a href="#" class="{% if paciente.completed %}completed{% endif %}">
+        {{ paciente.nombres }}
+      </a>
+      <div class="task-controls">
+        <div class="container-task">
+          <form action="{% url 'paciente-delete' paciente.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </form>
+          <a href="{% url 'paciente-update' paciente.id %}">
+            <i class="bi bi-pencil-square"></i>
+          </a>  
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>🎉 ¡Hey! Qué bien, no tienes tareas pendientes</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+<!-- Decir que cargaremos contenido estatico -->
+{% load static %}
+<!-- Contenido -->
+{%block content%}
+<section class="feature">
+  <div class="feature-content">
+    <h1>CLINICA ARCA</h1>
+    <p>
+      "Tu bienestar, nuestra prioridad: ¡Cuida de ti en nuestra clínica de excelencia!"
+    </p>
+  </div>
+  <img src="{%static 'images/freature2.jpg'%}" alt="" class="feature-image" />
+</section>
+{%endblock%}

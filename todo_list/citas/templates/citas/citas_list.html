@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+<a href="{% url 'citas-create' %}"
+            ><i  > </a>
+<div class="center">
+  <h2>Mi lista de Citas</h2>
+  {% if citas %}
+  <ul class="tasks">
+    {% for citas in citas %}
+    <li>
+      <a href="#" class="{% if citas.completed %}completed{% endif %}">
+        {{ citas.paciente.nombres }}
+      </a>
+      <div class="task-controls">
+        <div class="container-task">
+          <form action="{% url 'citas-delete' citas.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </form>
+          <a href="{% url 'citas-update' citas.id %}">
+            <i class="bi bi-pencil-square"></i>
+          </a>  
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>🎉 ¡Hey! Qué bien, no tienes doctores</p>
+  {% endif %}
+</div>
+{% endblock %}
