@@ -56,17 +56,6 @@
       </div>
     </header>
     <main>
-       {% comment %} ALERTA {% endcomment %}
-      {% comment %} <div id="message-container">
-        {% if messages %}
-          <ul class="alert-message">
-            {% for message in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div> {% endcomment %}
-      {% comment %} FIN ALERTA {% endcomment %}
       <div class="container">{% block content %} {% endblock %}</div>
     </main>
     <footer class="footer">
