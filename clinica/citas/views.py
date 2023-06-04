@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from .models import tipoDocumento, tipoSeguro,Paciente,Especialidades,Doctores,Citas
 from django import forms
 
+from users.models import usuario
+
 # Create your views here.
 
 def home(request):
@@ -55,7 +57,7 @@ class seguroCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, "El documento fue creado correctamente.")
+        messages.success(self.request, "El seguro fue creado correctamente.")
         return super(seguroCreate, self).form_valid(form)
     
 class seguroUpdate(UpdateView):
@@ -64,7 +66,7 @@ class seguroUpdate(UpdateView):
     success_url = reverse_lazy("tipoSeguro")
 
     def form_valid(self, form):
-        messages.success(self.request, "El documento fue actualizado correctamente.")
+        messages.success(self.request, "El seguro fue actualizado correctamente.")
         return super(seguroUpdate, self).form_valid(form)
     
 class seguroDelete(DeleteView):
@@ -72,7 +74,7 @@ class seguroDelete(DeleteView):
     success_url = reverse_lazy("tipoSeguro")
 
     def form_valid(self, request, *args, **kwargs):
-        messages.success(self.request, "El documento fue eliminado correctamente.")
+        messages.success(self.request, "El seguro fue eliminado correctamente.")
         return super().delete(request, *args, **kwargs)
     
 class pacienteList(ListView):
@@ -108,7 +110,7 @@ class pacienteUpdate(UpdateView):
     success_url = reverse_lazy("paciente")
 
     def form_valid(self, form):
-        messages.success(self.request, "El documento fue actualizado correctamente.")
+        messages.success(self.request, "El paciente fue actualizado correctamente.")
         return super(pacienteUpdate, self).form_valid(form)
     
 class pacienteDelete(DeleteView):
@@ -116,7 +118,7 @@ class pacienteDelete(DeleteView):
     success_url = reverse_lazy("paciente")
 
     def form_valid(self, request, *args, **kwargs):
-        messages.success(self.request, "El documento fue eliminado correctamente.")
+        messages.success(self.request, "El paciente fue eliminado correctamente.")
         return super().delete(request, *args, **kwargs)
 
 class especialidadesList(ListView):
@@ -131,7 +133,7 @@ class especialidadesCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, "El documento fue creado correctamente.")
+        messages.success(self.request, "La especialidad fue creado correctamente.")
         return super(especialidadesCreate, self).form_valid(form)
     
 class especialidadesUpdate(UpdateView):
@@ -140,7 +142,7 @@ class especialidadesUpdate(UpdateView):
     success_url = reverse_lazy("especialidades")
 
     def form_valid(self, form):
-        messages.success(self.request, "El documento fue actualizado correctamente.")
+        messages.success(self.request, "La especialidad fue actualizado correctamente.")
         return super(especialidadesUpdate, self).form_valid(form)
     
 class especialidadesDelete(DeleteView):
@@ -148,7 +150,7 @@ class especialidadesDelete(DeleteView):
     success_url = reverse_lazy("especialidades")
 
     def form_valid(self, request, *args, **kwargs):
-        messages.success(self.request, "El documento fue eliminado correctamente.")
+        messages.success(self.request, "La especialidad fue eliminado correctamente.")
         return super().delete(request, *args, **kwargs)
     
 class doctorList(ListView):
@@ -163,7 +165,7 @@ class doctorCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, "El documento fue creado correctamente.")
+        messages.success(self.request, "El doctor fue creado correctamente.")
         return super(doctorCreate, self).form_valid(form)
     
 class doctorUpdate(UpdateView):
@@ -172,7 +174,7 @@ class doctorUpdate(UpdateView):
     success_url = reverse_lazy("doctores")
 
     def form_valid(self, form):
-        messages.success(self.request, "El documento fue actualizado correctamente.")
+        messages.success(self.request, "El doctor fue actualizado correctamente.")
         return super(doctorUpdate, self).form_valid(form)
     
 class doctorDelete(DeleteView):
@@ -180,7 +182,7 @@ class doctorDelete(DeleteView):
     success_url = reverse_lazy("doctores")
 
     def form_valid(self, request, *args, **kwargs):
-        messages.success(self.request, "El documento fue eliminado correctamente.")
+        messages.success(self.request, "El doctor fue eliminado correctamente.")
         return super().delete(request, *args, **kwargs)
     
 class citasList(ListView):
@@ -208,7 +210,7 @@ class citasCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, "El paciente fue creado correctamente.")
+        messages.success(self.request, "La cita fue creado correctamente.")
         return super().form_valid(form)
     
 class citasUpdate(UpdateView):
@@ -217,7 +219,7 @@ class citasUpdate(UpdateView):
     success_url = reverse_lazy("citas")
 
     def form_valid(self, form):
-        messages.success(self.request, "El documento fue actualizado correctamente.")
+        messages.success(self.request, "La cita fue actualizado correctamente.")
         return super(citasUpdate, self).form_valid(form)
     
 class citasDelete(DeleteView):
@@ -225,5 +227,19 @@ class citasDelete(DeleteView):
     success_url = reverse_lazy("citas")
 
     def form_valid(self, request, *args, **kwargs):
-        messages.success(self.request, "El documento fue eliminado correctamente.")
+        messages.success(self.request, "La cita fue eliminado correctamente.")
         return super().delete(request, *args, **kwargs)
+    
+class usuarioList(ListView):
+    model = usuario
+    context_object_name = "usuario"
+    template_name = "usuario.html"
+
+class usuarioUpdate(UpdateView):
+    model = usuario
+    fields = ["username","full_name","telefono","email","password"]
+    success_url = reverse_lazy("usuario")
+
+    def form_valid(self, form):
+        messages.success(self.request, "El usuario fue actualizado correctamente.")
+        return super(usuarioUpdate, self).form_valid(form)

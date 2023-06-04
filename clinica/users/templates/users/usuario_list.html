@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="center">
+  <h2>Mi lista de Usuarios</h2>
+  {% if usuario %}
+  <ul class="tasks">
+    {% for usuario in usuario %}
+    <li>
+      <a href="#" class="{% if usuario.completed %}completed{% endif %}">
+        {{ usuario.full_name }}
+      </a>
+       <div class="task-controls">
+        <div class="container-task">
+          {% comment %} <a href="{% url 'usuario-update' usuario.telefono %}">
+            <i class="bi bi-pencil-square"></i>
+          </a>   {% endcomment %}
+        </div>
+      </div> 
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>🎉 ¡Hey! Qué mal, no tienes seguros</p>
+  {% endif %}
+</div>
+{% endblock %}
